@@ -1,11 +1,13 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import Stats from "three/examples/jsm/libs/stats.module.js";
+import gsap from "gsap";
 
 export default class SceneInit {
   private scene: THREE.Scene;
   cameraDev: THREE.PerspectiveCamera;
   camera: THREE.PerspectiveCamera;
+  cameraLookPoint: THREE.Mesh;
   private renderer: THREE.WebGLRenderer;
   private fov: number;
   private nearPlane: number;
@@ -47,21 +49,30 @@ export default class SceneInit {
       this.farPlane
     );
 
+    this.cameraLookPoint = new THREE.Mesh(
+      new THREE.SphereGeometry(0),
+      new THREE.LineBasicMaterial()
+    );
+    this.cameraLookPoint.position.x = -5;
+    this.cameraLookPoint.position.y = 2;
+
     // NOTE: Additional components.
     this.clock = new THREE.Clock();
     this.delta = 0;
     this.stats = new Stats();
     this.controls = new OrbitControls(this.cameraDev, this.renderer.domElement);
+    // this.controls.zoomSpeed = 0;
 
     // NOTE: Lighting is basically required.
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.06);
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 
-    this.cameraDev.position.z = 48;
+    this.cameraDev.position.z = 20;
+    this.cameraDev.position.x = 20;
+
     this.camera.position.z = 10;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
-    // document.body.appendChild(this.stats.dom);
 
     // ambient light which is for the whole scene
     this.ambientLight.castShadow = true;
@@ -78,9 +89,36 @@ export default class SceneInit {
     // const gridHelper = new THREE.GridHelper(100, 100);
     // const cameraHelper = new THREE.CameraHelper(this.camera);
     // this.scene.add(directionalLH, gridHelper, cameraHelper, this.camera);
+    // document.body.appendChild(this.stats.dom); //todo
 
     // if window resizes
     window.addEventListener("resize", () => this.onWindowResize(), false);
+    window.addEventListener("wheel", (event) => {
+      const deltaZ = event.deltaY * (this.camera.position.z / 1000);
+
+      if (this.camera.position.z + deltaZ < 10) return;
+      if (this.camera.position.z + deltaZ > 86) return;
+
+      gsap.to(this.camera.position, {
+        // x: this.camera.position.x + deltaX,
+        // y: this.camera.position.x + deltaY,
+        z: this.camera.position.z + deltaZ,
+        duration: 0.25,
+      });
+      gsap.to(this.cameraDev.position, {
+        // x: this.camera.position.x + deltaX,
+        // y: this.camera.position.x + deltaY,
+        z: this.cameraDev.position.z + deltaZ,
+        duration: 0.25,
+      });
+      gsap.to(this.cameraLookPoint.position, {
+        x: this.cameraLookPoint.position.x + deltaZ * 1.1,
+        z: this.cameraLookPoint.position.z + deltaZ * 0.1,
+        duration: 0.25,
+      });
+
+      console.log(this.camera.position.z);
+    });
   }
 
   addStars(this: SceneInit, count = 1, spread = 512) {
@@ -99,11 +137,16 @@ export default class SceneInit {
     }
   }
 
-  moveCamera() {
-    const t = document.body.getBoundingClientRect().top;
+  moveCamera(event: WheelEvent) {
+    const delta = event.deltaY * 0.1;
+    // console.log(delta);
 
-    this.camera.position.z = t * -0.01;
-    this.camera.position.x = t * -0.0002;
+    // const t = document.body.getBoundingClientRect().top;
+
+    // this.camera.position.z = t * -0.01;
+    this.camera.position.x += delta;
+
+    // console.log(this.camera.position);
   }
 
   animate() {
@@ -111,6 +154,7 @@ export default class SceneInit {
     // requestAnimationFrame(this.animate.bind(this));
     requestAnimationFrame(this.animate.bind(this));
 
+    this.camera.lookAt(this.cameraLookPoint.position);
     this.render(this.camera); // todo Camera here
     this.stats.update();
     this.controls.update();
@@ -124,12 +168,13 @@ export default class SceneInit {
   }
 
   onWindowResize() {
-    this.cameraDev.aspect = window.innerWidth / window.innerHeight;
+    this.cameraDev.aspect = window.outerWidth / window.outerHeight;
     this.cameraDev.updateProjectionMatrix();
-    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.aspect = window.outerWidth / window.outerHeight;
     this.camera.updateProjectionMatrix();
 
-    this.renderer?.setSize(window.innerWidth, window.innerHeight);
+    this.renderer?.setSize(window.outerWidth, window.outerHeight);
+    // console.log(window.outerWidth, window.innerWidth);
   }
 
   getScene() {

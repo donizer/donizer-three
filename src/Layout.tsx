@@ -1,4 +1,6 @@
 import "./Layout.scss";
+import GitHubIco from "./assets/github-mark-white.svg";
+import LinkedInIco from "./assets/LI-In-Bug.png";
 
 const Layout = () => {
   return (
@@ -11,17 +13,43 @@ const Layout = () => {
         <h2>Contact</h2>
         <ul>
           <li>
-            <a href="mailto:bogdan.ua45@gmail.com">bogdan.ua45@gmail.com </a>{" "}
+            <a href="mailto:bogdan.ua45@gmail.com" style={{ display: "block" }}>
+              📧 bogdan.ua45@gmail.com
+            </a>
           </li>
           <li>
-            <a href="https://goo.gl/maps/Ripy6AqZmeaqzobi7">Sumy, Ukraine</a>
+            <a
+              href="https://goo.gl/maps/Ripy6AqZmeaqzobi7"
+              style={{ display: "block" }}
+            >
+              🌍 Sumy, Ukraine
+            </a>
           </li>
           <li>
-            <a href="https://github.com/donizer">github.com/donizer</a>{" "}
+            <a href="https://github.com/donizer" style={{ display: "block" }}>
+              <img
+                src={GitHubIco}
+                alt="GitHub"
+                style={{ display: "inline" }}
+                width={"16em"}
+              />{" "}
+              <p style={{ display: "inline" }}>github.com/donizer</p>
+            </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/bohdan-sheiko/">
-              linkedin.com/in/bohdan-sheiko/
+            <a
+              href="https://www.linkedin.com/in/bohdan-sheiko/"
+              style={{ display: "block" }}
+            >
+              <img
+                src={LinkedInIco}
+                alt="LinkedIn"
+                style={{ display: "inline" }}
+                width={"16em"}
+              />{" "}
+              <p style={{ display: "inline" }}>
+                linkedin.com/in/bohdan-sheiko/
+              </p>
             </a>
           </li>
         </ul>
@@ -70,15 +98,21 @@ const Layout = () => {
       <article>
         <h2>LANGUAGES</h2>
         <div className="justify">
-            <div>
-              <p>Ukrainian</p>
-              <p className="subtext">Native or Bilingual Proficiency</p>
-            </div>
-            <div>
-              <p>English</p>
-              <p className="subtext">Professional Working Proficiency</p>
-            </div>
-          </div>
+          <ul>
+            <li>
+              <div>
+                <p>Ukrainian</p>
+                <p className="subtext">Native or Bilingual Proficiency</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <p>English</p>
+                <p className="subtext">Professional Working Proficiency</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </article>
       {/* <footer>Footer</footer> */}
     </div>
