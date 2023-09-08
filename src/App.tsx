@@ -3,8 +3,10 @@ import * as THREE from "three";
 import SceneInit from "./lib/SceneInit";
 
 import earthImg from "./assets/8k_earth_daymap.jpg";
-import earthNormalMap from "./assets/Solarsystemscope_texture_8k_earth_normal_map.jpg";
-import earthCloudsImg from "./assets/Solarsystemscope_texture_8k_earth_clouds.png";
+// import earthNormalMap from "./assets/Solarsystemscope_texture_8k_earth_normal_map.jpg";
+import earthNormalMap from "./assets/2k_earth_normal_map.jpg";
+// import earthCloudsImg from "./assets/Solarsystemscope_texture_8k_earth_clouds.png";
+import earthCloudsImg from "./assets/Solarsystemscope_texture_2k_earth_clouds.png";
 // import skyMap from "./assets/eso0932a.jpg";
 // import rockCol from "./assets/rocks_ground_02_1k/textures/rocks_ground_02_col_1k.jpg";
 // import rockNor from "./assets/rocks_ground_02_1k/textures/rocks_ground_02_nor_gl_1k.jpg";
