@@ -96,50 +96,62 @@ export default class SceneInit {
     window.addEventListener("resize", () => this.onWindowResize(), false);
     window.addEventListener("wheel", (event) => {
       const deltaZ = event.deltaY * (this.camera.position.z / 1000);
-
-      if (this.camera.position.z + deltaZ < 10) return;
-      if (this.camera.position.z + deltaZ > 86) return;
-
-      gsap.to(this.camera.position, {
-        z: this.camera.position.z + deltaZ,
-        duration: 0.25,
-      });
-      gsap.to(this.cameraDev.position, {
-        z: this.cameraDev.position.z + deltaZ,
-        duration: 0.25,
-      });
-      gsap.to(this.cameraLookPoint.position, {
-        x: this.cameraLookPoint.position.x + deltaZ * 1.1,
-        z: this.cameraLookPoint.position.z + deltaZ * 0.1,
-        duration: 0.25,
-      });
-
-      // console.log(this.camera.position.z);
-      // console.log(deltaZ);
+      // if (false)
+      if (deltaZ > 0) {
+        gsap.to(this.camera.position, {
+          z: 86,
+          duration: 2,
+          ease: "power2.in",
+        });
+        gsap.to(this.cameraLookPoint.position, {
+          x: 65,
+          z: 6.5,
+          duration: 2,
+          ease: "power2.in",
+        });
+      } else {
+        gsap.to(this.camera.position, {
+          z: 10,
+          duration: 2,
+          ease: "power2.out",
+        });
+        gsap.to(this.cameraLookPoint.position, {
+          x: -5,
+          z: 0,
+          duration: 2,
+          ease: "power2.out",
+        });
+      }
     });
     window.addEventListener("touchmove", (event) => {
       if (this.touchYPrevious) {
         const delta = this.touchYPrevious - event.touches[0].clientY;
         const deltaZ = delta * (this.camera.position.z / 100);
-
-        if (this.camera.position.z + deltaZ < 10) return;
-        if (this.camera.position.z + deltaZ > 28) return;
-
-        gsap.to(this.camera.position, {
-          z: this.camera.position.z + deltaZ,
-          duration: 0.25,
-        });
-        gsap.to(this.cameraDev.position, {
-          z: this.cameraDev.position.z + deltaZ,
-          duration: 0.25,
-        });
-        gsap.to(this.cameraLookPoint.position, {
-          x: this.cameraLookPoint.position.x + deltaZ * 0.65,
-          z: this.cameraLookPoint.position.z + deltaZ * 0.1,
-          duration: 0.25,
-        });
-
-        // console.log(delta, deltaZ);
+        if (deltaZ > 0) {
+          gsap.to(this.camera.position, {
+            z: 18,
+            duration: 1.5,
+            ease: "power2.in",
+          });
+          gsap.to(this.cameraLookPoint.position, {
+            x: 0,
+            z: 6.5,
+            duration: 1.5,
+            ease: "power2.in",
+          });
+        } else {
+          gsap.to(this.camera.position, {
+            z: 12,
+            duration: 1.5,
+            ease: "power2.out",
+          });
+          gsap.to(this.cameraLookPoint.position, {
+            x: -2,
+            z: 0,
+            duration: 1.5,
+            ease: "power2.out",
+          });
+        }
       }
 
       this.touchYPrevious = event.touches[0].clientY;
