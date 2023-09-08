@@ -115,7 +115,7 @@ export default class SceneInit {
       });
 
       // console.log(this.camera.position.z);
-      console.log(deltaZ);
+      // console.log(deltaZ);
     });
     window.addEventListener("touchmove", (event) => {
       if (this.touchYPrevious) {
@@ -139,7 +139,7 @@ export default class SceneInit {
           duration: 0.25,
         });
 
-        console.log(delta, deltaZ);
+        // console.log(delta, deltaZ);
       }
 
       this.touchYPrevious = event.touches[0].clientY;
