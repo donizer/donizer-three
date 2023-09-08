@@ -45,7 +45,7 @@ const Layout = () => {
         <div className="experience">
           <h3>Bioprocess Informatics</h3>
           <h4>Weihenstephan-Triesdorf University of Applied Sciences</h4>
-          <div className="date">
+          <div className="justify ">
             <p className="subtext">09/2022 - 12/2022</p>
             <p className="subtext">Germany (Online)</p>
           </div>
