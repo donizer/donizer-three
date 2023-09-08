@@ -8,6 +8,7 @@ export default class SceneInit {
   cameraDev: THREE.PerspectiveCamera;
   camera: THREE.PerspectiveCamera;
   cameraLookPoint: THREE.Mesh;
+  private touchYPrevious: number | null;
   private renderer: THREE.WebGLRenderer;
   private fov: number;
   private nearPlane: number;
@@ -27,6 +28,7 @@ export default class SceneInit {
     this.nearPlane = 0.1;
     this.farPlane = 16000;
     this.canvasId = canvasId;
+    this.touchYPrevious = null;
 
     // NOTE: Core components to initialize Three.js app.
     this.canvas = document.getElementById(this.canvasId)!;
@@ -91,7 +93,6 @@ export default class SceneInit {
     // this.scene.add(directionalLH, gridHelper, cameraHelper, this.camera);
     // document.body.appendChild(this.stats.dom); //todo
 
-    // if window resizes
     window.addEventListener("resize", () => this.onWindowResize(), false);
     window.addEventListener("wheel", (event) => {
       const deltaZ = event.deltaY * (this.camera.position.z / 1000);
@@ -100,14 +101,10 @@ export default class SceneInit {
       if (this.camera.position.z + deltaZ > 86) return;
 
       gsap.to(this.camera.position, {
-        // x: this.camera.position.x + deltaX,
-        // y: this.camera.position.x + deltaY,
         z: this.camera.position.z + deltaZ,
         duration: 0.25,
       });
       gsap.to(this.cameraDev.position, {
-        // x: this.camera.position.x + deltaX,
-        // y: this.camera.position.x + deltaY,
         z: this.cameraDev.position.z + deltaZ,
         duration: 0.25,
       });
@@ -117,7 +114,38 @@ export default class SceneInit {
         duration: 0.25,
       });
 
-      console.log(this.camera.position.z);
+      // console.log(this.camera.position.z);
+      console.log(deltaZ);
+    });
+    window.addEventListener("touchmove", (event) => {
+      if (this.touchYPrevious) {
+        const delta = this.touchYPrevious - event.touches[0].clientY;
+        const deltaZ = delta * (this.camera.position.z / 100);
+
+        if (this.camera.position.z + deltaZ < 10) return;
+        if (this.camera.position.z + deltaZ > 28) return;
+
+        gsap.to(this.camera.position, {
+          z: this.camera.position.z + deltaZ,
+          duration: 0.25,
+        });
+        gsap.to(this.cameraDev.position, {
+          z: this.cameraDev.position.z + deltaZ,
+          duration: 0.25,
+        });
+        gsap.to(this.cameraLookPoint.position, {
+          x: this.cameraLookPoint.position.x + deltaZ * 0.65,
+          z: this.cameraLookPoint.position.z + deltaZ * 0.1,
+          duration: 0.25,
+        });
+
+        console.log(delta, deltaZ);
+      }
+
+      this.touchYPrevious = event.touches[0].clientY;
+    });
+    window.addEventListener("touchend", () => {
+      this.touchYPrevious = null;
     });
   }
 
@@ -137,18 +165,6 @@ export default class SceneInit {
     }
   }
 
-  moveCamera(event: WheelEvent) {
-    const delta = event.deltaY * 0.1;
-    // console.log(delta);
-
-    // const t = document.body.getBoundingClientRect().top;
-
-    // this.camera.position.z = t * -0.01;
-    this.camera.position.x += delta;
-
-    // console.log(this.camera.position);
-  }
-
   animate() {
     // NOTE: Window is implied.
     // requestAnimationFrame(this.animate.bind(this));
@@ -161,9 +177,6 @@ export default class SceneInit {
   }
 
   render(camera = this.cameraDev, scene = this.scene) {
-    // NOTE: Update uniform data on each render.
-    // this.uniforms.u_time.value += this.clock.getDelta();
-
     this.renderer.render(scene, camera);
   }
 
@@ -174,7 +187,6 @@ export default class SceneInit {
     this.camera.updateProjectionMatrix();
 
     this.renderer?.setSize(window.outerWidth, window.outerHeight);
-    // console.log(window.outerWidth, window.innerWidth);
   }
 
   getScene() {
