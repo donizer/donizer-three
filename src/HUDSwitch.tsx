@@ -12,7 +12,7 @@ const HUDSwitch = (prop: {
   return (
     <button
       type="button"
-      className={`text-white absolute bottom-4 right-4 ${
+      className={`text-white fixed bottom-4 right-4 ${
         !prop.isHudEnabled ? "bg-blue-500/80" : "bg-red-500/80"
       } cursor-pointer z-50 m-4 p-4  rounded-full`}
       onClick={handleClick}
