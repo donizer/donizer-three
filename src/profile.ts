@@ -3,7 +3,7 @@ import { propType } from "./BubbleList.tsx";
 import mailIco from "./assets/icons/icons8-mail-48.png";
 import earthIco from "./assets/icons/icons8-google-earth.svg";
 import GitHubIco from "./assets/icons/github-mark-white.svg";
-import LinkedInIco from "./assets/icons/LI-In-Bug.png";
+import LinkedInIco from "./assets/icons/LI-In-Bug-sq.png";
 
 export const contactJson: propType[] = [
   {

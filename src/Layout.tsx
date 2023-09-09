@@ -25,22 +25,26 @@ const Layout = () => {
       <div
         className={`wrapper ${
           isHudEnabled ? "" : "hidden"
-        } ${"w-screen"} auto-rows-80pxAuto absolute z-10 m-auto mb-0 mt-0 grid  cursor-default grid-cols-1 overflow-auto p-1  text-white md:grid-cols-12  md:pt-[100px]`}
+        } auto-rows-80pxAuto absolute z-10 m-auto mb-0 mt-0 grid w-screen cursor-default grid-cols-1 overflow-auto p-1  text-white lg:grid-cols-12  lg:pt-[100px]`}
       >
         <Header
           heading="Bohdan Sheiko"
-          subHeading="Front-End Developer"
+          subHeading="Front-End Developer, junior"
         ></Header>
+
         <InfoBlock header="Contact">
           <BubbleList prop={contactJson}></BubbleList>
         </InfoBlock>
-        <InfoBlock header="skills">
+
+        <InfoBlock header="technologies">
           <BubbleList prop={skillsJson}></BubbleList>
         </InfoBlock>
+
         <InfoBlock header="education">
           <Experience json={germanyCourseJson}></Experience>
           <Experience json={snauCourseJson}></Experience>
         </InfoBlock>
+
         <InfoBlock header="languages">
           <Languages json={languagesJson}></Languages>
         </InfoBlock>
