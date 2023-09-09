@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#myThreeJsCanvas{
+#myThreeJsCanvas {
   position: fixed;
   top: 0;
   left: 0;

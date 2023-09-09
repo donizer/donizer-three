@@ -26,7 +26,7 @@ function App() {
 
     const earthTexture = new THREE.TextureLoader().load(earthImg);
     const earthNormalMapTexture = new THREE.TextureLoader().load(
-      earthNormalMap
+      earthNormalMap,
     );
     const earthCloudTexture = new THREE.TextureLoader().load(earthCloudsImg);
     const earth = new THREE.Mesh(
@@ -34,7 +34,7 @@ function App() {
       new THREE.MeshStandardMaterial({
         map: earthTexture,
         normalMap: earthNormalMapTexture,
-      })
+      }),
     );
     const earthClouds = new THREE.Mesh(
       new THREE.SphereGeometry(6.05, 64, 64),
@@ -43,12 +43,12 @@ function App() {
         transparent: true,
         opacity: 1,
         side: THREE.DoubleSide,
-      })
+      }),
     );
 
     const torus = new THREE.Mesh(
       new THREE.TorusGeometry(1, 0.35, 64, 64),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
     torus.position.z = 7;
     torus.position.x = 2;
@@ -56,7 +56,7 @@ function App() {
 
     const cone = new THREE.Mesh(
       new THREE.ConeGeometry(0.75, 2, 64, 64),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
     cone.position.z = 7;
     cone.position.x = -3;
@@ -66,7 +66,7 @@ function App() {
 
     const dodecahedron = new THREE.Mesh(
       new THREE.DodecahedronGeometry(1, 0),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
 
     dodecahedron.position.z = 7;
@@ -75,7 +75,7 @@ function App() {
 
     const box = new THREE.Mesh(
       new THREE.BoxGeometry(1, 1, 1),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
 
     box.position.z = 8;
@@ -84,7 +84,7 @@ function App() {
 
     const torus2 = new THREE.Mesh(
       new THREE.TorusGeometry(8, 3, 64, 64),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
     torus2.position.z = 16;
     torus2.position.x = -8;
@@ -92,7 +92,7 @@ function App() {
 
     const cone2 = new THREE.Mesh(
       new THREE.ConeGeometry(15, 35, 64, 64),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
     cone2.position.z = 42;
     cone2.position.x = 64;
@@ -102,7 +102,7 @@ function App() {
 
     const box2 = new THREE.Mesh(
       new THREE.BoxGeometry(128, 128, 128),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
 
     box2.position.z = 86;
@@ -113,7 +113,7 @@ function App() {
 
     const dodecahedron2 = new THREE.Mesh(
       new THREE.DodecahedronGeometry(12, 0),
-      new THREE.MeshNormalMaterial()
+      new THREE.MeshNormalMaterial(),
     );
 
     dodecahedron2.position.z = 46;
@@ -133,7 +133,7 @@ function App() {
 
     earthGroup.add(earth, earthClouds);
     earthGroup.rotation.y = 4.2;
-    earthGroup.rotation.z = -0.8;
+    earthGroup.rotation.z = -0.95;
 
     sceneObject.getScene().add(earthGroup, ...decor);
 

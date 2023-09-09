@@ -1,6 +1,6 @@
 import React from "react";
-import hideImage from "./assets/hide_image_FILL0_wght400_GRAD0_opsz24.svg";
-import showIcon from "./assets/image_FILL0_wght400_GRAD0_opsz24.svg";
+import hideImage from "./assets/icons/hide_image_FILL0_wght400_GRAD0_opsz24.svg";
+import showIco from "./assets/icons/image_FILL0_wght400_GRAD0_opsz24.svg";
 
 const HUDSwitch = (prop: {
   isHudEnabled: boolean;
@@ -12,12 +12,12 @@ const HUDSwitch = (prop: {
   return (
     <button
       type="button"
-      className={`text-white fixed bottom-4 right-4 ${
+      className={`fixed bottom-4 right-4 text-white ${
         !prop.isHudEnabled ? "bg-blue-500/80" : "bg-red-500/80"
-      } cursor-pointer z-50 m-4 p-4  rounded-full`}
+      } z-50 m-4 cursor-pointer rounded-full  p-4`}
       onClick={handleClick}
     >
-      <img src={`${prop.isHudEnabled ? hideImage : showIcon}`} alt="" />
+      <img src={`${prop.isHudEnabled ? hideImage : showIco}`} alt="" />
     </button>
   );
 };

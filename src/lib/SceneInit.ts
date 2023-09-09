@@ -42,18 +42,18 @@ export default class SceneInit {
       this.fov,
       window.innerWidth / window.innerHeight,
       this.nearPlane,
-      this.farPlane
+      this.farPlane,
     );
     this.camera = new THREE.PerspectiveCamera(
       this.fov,
       window.innerWidth / window.innerHeight,
       this.nearPlane,
-      this.farPlane
+      this.farPlane,
     );
 
     this.cameraLookPoint = new THREE.Mesh(
       new THREE.SphereGeometry(0),
-      new THREE.LineBasicMaterial()
+      new THREE.LineBasicMaterial(),
     );
     this.cameraLookPoint.position.x = -5;
     this.cameraLookPoint.position.y = 2;
