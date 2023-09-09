@@ -4,6 +4,6 @@ Here's you can watch my [resumé](https://donizer.github.io/donizer-three/)
 
 ## My contacts:
 
-- [e-mail](mailto:bogdan.ua45@gmail.com)
-- [telegram](https://t.me/donizer)
-- [linkedIn](https://www.linkedin.com/in/bohdan-sheiko)
+- [e-mail](mailto:bogdan.ua45@gmail.com): bogdan.ua45@gmail.com
+- [telegram](https://t.me/donizer): @donizer, https://t.me/donizer
+- [linkedIn](https://www.linkedin.com/in/bohdan-sheiko): https://www.linkedin.com/in/bohdan-sheiko
