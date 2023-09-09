@@ -162,7 +162,7 @@ export default class SceneInit {
   }
 
   addStars(this: SceneInit, count = 1, spread = 512) {
-    const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+    const geometry = new THREE.SphereGeometry(0.75, 4, 4);
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
     for (let i = 0; i < count; i++) {

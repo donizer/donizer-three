@@ -55,7 +55,7 @@ function App() {
     torus.position.y = 2;
 
     const cone = new THREE.Mesh(
-      new THREE.ConeGeometry(1, 3, 64, 64),
+      new THREE.ConeGeometry(0.75, 2, 64, 64),
       new THREE.MeshNormalMaterial()
     );
     cone.position.z = 7;
@@ -91,7 +91,7 @@ function App() {
     torus2.position.y = -12;
 
     const cone2 = new THREE.Mesh(
-      new THREE.ConeGeometry(20, 60, 64, 64),
+      new THREE.ConeGeometry(15, 35, 64, 64),
       new THREE.MeshNormalMaterial()
     );
     cone2.position.z = 42;
@@ -111,7 +111,25 @@ function App() {
     box2.rotation.x = 0.5;
     box2.rotation.z = 0.5;
 
-    const decor = [torus, cone, dodecahedron, box, torus2, cone2, box2];
+    const dodecahedron2 = new THREE.Mesh(
+      new THREE.DodecahedronGeometry(12, 0),
+      new THREE.MeshNormalMaterial()
+    );
+
+    dodecahedron2.position.z = 46;
+    dodecahedron2.position.x = 21;
+    dodecahedron2.position.y = -13.5;
+
+    const decor = [
+      torus,
+      cone,
+      dodecahedron,
+      box,
+      torus2,
+      cone2,
+      box2,
+      dodecahedron2,
+    ];
 
     earthGroup.add(earth, earthClouds);
     earthGroup.rotation.y = 4.2;
@@ -119,13 +137,27 @@ function App() {
 
     sceneObject.getScene().add(earthGroup, ...decor);
 
-    sceneObject.addStars(512, 1500);
+    sceneObject.addStars(1024, 3096);
+
+    const randomArrayFactor = (arr: THREE.Mesh[]) => {
+      const result: number[][] = [];
+      arr.map(() => {
+        result.push([
+          Math.random() / 960,
+          Math.random() / 1000,
+          Math.random() / 1100,
+        ]);
+      });
+      return result;
+    };
+
+    const randomFactors = randomArrayFactor(decor);
 
     const roatateArray = (arr: THREE.Mesh[]) => {
-      for (const element of arr) {
-        element.rotation.x += 0.0008;
-        element.rotation.z += 0.0005;
-        element.rotation.y += 0.0002;
+      for (const [i, element] of arr.entries()) {
+        element.rotation.x += randomFactors[i][0];
+        element.rotation.z += randomFactors[i][1];
+        element.rotation.y += randomFactors[i][2];
       }
     };
 
