@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import * as THREE from "three";
 import SceneInit from "./lib/SceneInit";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 
 // import donizerText from "../src/assets/models/donizer3DText.gltf?raw";
 
