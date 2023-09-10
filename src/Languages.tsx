@@ -1,5 +1,5 @@
 import React from "react";
-import { Language } from "./profile";
+import { Language } from "./lib/profile";
 
 const Languages: React.FC<{ json: Language[] }> = (prop) => {
   return (
@@ -8,7 +8,7 @@ const Languages: React.FC<{ json: Language[] }> = (prop) => {
         return (
           <li
             key={key}
-            className="hover:border-custom-cyan hover:shadow-custom-cyan-shadow m-1 rounded-lg border p-1 shadow-cyan-500 duration-150 ease-in"
+            className="m-1 rounded-lg border p-1 shadow-cyan-500 duration-150 ease-in hover:border-custom-cyan hover:shadow-custom-cyan-shadow"
           >
             <p className="text-xl">{element.language}</p>
             <p className="text-sm">{element.level}</p>

@@ -8,7 +8,7 @@ import {
   germanyCourseJson,
   snauCourseJson,
   languagesJson,
-} from "./profile.ts";
+} from "./lib/profile.ts";
 
 import InfoBlock from "./InfoBlock.tsx";
 import BubbleList from "./BubbleList.tsx";
@@ -25,7 +25,7 @@ const Layout = () => {
       <div
         className={`wrapper ${
           isHudEnabled ? "" : "hidden"
-        } auto-rows-80pxAuto absolute z-10 m-auto mb-0 mt-0 grid w-screen cursor-default grid-cols-1 overflow-auto p-1  text-white lg:grid-cols-12  lg:pt-[100px]`}
+        } absolute z-10 m-auto mb-0 mt-0 grid w-screen cursor-default auto-rows-80pxAuto grid-cols-1 overflow-auto p-1  text-white lg:grid-cols-12  lg:pt-[100px]`}
       >
         <Header
           heading="Bohdan Sheiko"

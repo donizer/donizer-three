@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import * as THREE from "three";
 import SceneInit from "./lib/SceneInit";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
+
+// import donizerText from "../src/assets/models/donizer3DText.gltf?raw";
 
 import earthImg from "./assets/8k_earth_daymap.jpg";
 // import earthNormalMap from "./assets/Solarsystemscope_texture_8k_earth_normal_map.jpg";
@@ -120,7 +124,21 @@ function App() {
     dodecahedron2.position.x = 21;
     dodecahedron2.position.y = -13.5;
 
-    const decor = [
+    let chairModel: THREE.Group | null = null;
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load("../src/assets/models/chair/chair.gltf", (gltf) => {
+      sceneObject.getScene().add(gltf.scene);
+      const model = gltf.scene;
+      chairModel = model;
+      model.scale.set(35, 35, 35);
+      model.position.z = 66;
+      model.position.x = 67;
+      model.position.y = -5;
+    });
+
+    type Decor = THREE.Mesh | THREE.Group;
+
+    const decor: Decor[] = [
       torus,
       cone,
       dodecahedron,
@@ -135,25 +153,28 @@ function App() {
     earthGroup.rotation.y = 4.2;
     earthGroup.rotation.z = -0.95;
 
-    sceneObject.getScene().add(earthGroup, ...decor);
+    sceneObject.getScene().add(earthGroup, ...decor); // earthGroup
 
     sceneObject.addStars(1024, 3096);
 
-    const randomArrayFactor = (arr: THREE.Mesh[]) => {
+    const random = () => {
+      let num = Math.random();
+      num *= Math.round(Math.random()) ? 1 : -1;
+
+      return num;
+    };
+    const randomArrayFactor = (arr: Decor[]) => {
       const result: number[][] = [];
       arr.map(() => {
-        result.push([
-          Math.random() / 960,
-          Math.random() / 1000,
-          Math.random() / 1100,
-        ]);
+        result.push([random() / 960, random() / 1000, random() / 1100]);
       });
       return result;
     };
 
     const randomFactors = randomArrayFactor(decor);
+    console.log(randomFactors);
 
-    const roatateArray = (arr: THREE.Mesh[]) => {
+    const roatateArray = (arr: Decor[]) => {
       for (const [i, element] of arr.entries()) {
         element.rotation.x += randomFactors[i][0];
         element.rotation.z += randomFactors[i][1];
@@ -165,6 +186,12 @@ function App() {
       window.requestAnimationFrame(animate);
 
       roatateArray(decor);
+
+      if (chairModel) {
+        chairModel.rotation.x += Math.random() / 1820;
+        chairModel.rotation.y -= Math.random() / 2000;
+        chairModel.rotation.z += Math.random() / 2200;
+      }
 
       const delta = sceneObject.getClock().getDelta();
 

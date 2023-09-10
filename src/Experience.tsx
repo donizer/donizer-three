@@ -1,4 +1,4 @@
-import { ExperienceType } from "./profile";
+import { ExperienceType } from "./lib/profile";
 import DateAndPlace from "./DateAndPlace";
 import BubbleList from "./BubbleList";
 
