@@ -124,7 +124,7 @@ function App() {
       chairModel = model;
       model.scale.set(35, 35, 35);
       model.position.z = 66;
-      model.position.x = 67;
+      model.position.x = 69;
       model.position.y = -5;
     });
 
