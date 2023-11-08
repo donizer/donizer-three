@@ -9,7 +9,6 @@ export type propType = {
 const BubbleList: React.FC<{ prop: propType[] }> = (json) => {
   return (
     <ul className="flex flex-wrap">
-      {}
       {json.prop.map((listItem, key) => {
         return (
           <li

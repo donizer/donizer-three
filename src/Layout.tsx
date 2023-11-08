@@ -25,11 +25,11 @@ const Layout = () => {
       <div
         className={`wrapper ${
           isHudEnabled ? "" : "hidden"
-        } absolute z-10 m-auto mb-0 mt-0 grid w-screen cursor-default auto-rows-80pxAuto grid-cols-1 overflow-auto p-1  text-white lg:grid-cols-12  lg:pt-[100px]`}
+        } absolute z-10 m-auto mb-0 mt-0 grid w-screen cursor-default auto-rows-80pxAuto grid-cols-1 overflow-auto p-1 text-white lg:grid-cols-12  lg:pt-[100px]`}
       >
         <Header
           heading="Bohdan Sheiko"
-          subHeading="Front-End Developer, junior"
+          subHeading="Front-End Developer"
         ></Header>
 
         <InfoBlock header="Contact">
